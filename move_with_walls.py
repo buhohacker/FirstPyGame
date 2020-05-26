@@ -18,10 +18,10 @@ ALTO_PANTALLA = 600
 class Protagonista(pygame.sprite.Sprite):
     """ Esta clase representa la barra inferior que controla el protagonista. """
 
-    # Función Constructor
+    # Funcion Constructor
     def __init__(self, x, y):
         #  Llama al constructor padre
-        super().__init__()
+        super(Protagonista, self).__init__() # Esta escrito para python2, para python3 --> super().__init__()
 
         # Establecemos el alto y largo
         self.image = pygame.Surface([15, 15])
@@ -47,7 +47,7 @@ class Protagonista(pygame.sprite.Sprite):
         # Desplazar izquierda/derecha
         self.rect.x += self.cambio_x
 
-        # Hemos chocado contra la pared después de esta actualización?
+        # Hemos chocado contra la pared despues de esta actualizacion?
         lista_impactos_bloques = pygame.sprite.spritecollide(self, self.paredes, False)
         for bloque in lista_impactos_bloques:
             #Si nos estamos desplazando hacia la derecha, hacemos que nuestro lado derecho sea el lado izquierdo del objeto que hemos tocado-
@@ -64,7 +64,7 @@ class Protagonista(pygame.sprite.Sprite):
         lista_impactos_bloques = pygame.sprite.spritecollide(self, self.paredes, False)
         for bloque in lista_impactos_bloques:
 
-            # Reseteamos nuestra posición basándonos en la parte superior/inferior del objeto.
+            # Reseteamos nuestra posicion basandonos en la parte superior/inferior del objeto.
             if self.cambio_y > 0:
                 self.rect.bottom = bloque.rect.top
             else:
@@ -75,9 +75,9 @@ class Pared(pygame.sprite.Sprite):
     def __init__(self, x, y, largo, alto):
         """ Constructor para la pared con la que el protagonista puede encontrarse """
         #  Llama al constructor padre
-        super().__init__()
+        super(Pared, self).__init__() # Esta escrito para python2, para python3 --> super().__init__()
 
-        # Construye una pared azul con las dimensiones especificadas por los parámetros
+        # Construye una pared azul con las dimensiones especificadas por los parametros
         self.image = pygame.Surface([largo, alto])
         self.image.fill(AZUL)
 
@@ -87,13 +87,13 @@ class Pared(pygame.sprite.Sprite):
         self.rect.x = x
 
 
-# Llamamos a esta función para que la biblioteca Pygame pueda autoiniciarse.
+# Llamamos a esta funcion para que la biblioteca Pygame pueda autoiniciarse.
 pygame.init()
 
 # Creamos una pantalla de 800x600
 pantalla = pygame.display.set_mode([LARGO_PANTALLA, ALTO_PANTALLA])
 
-# Creamos el título de la ventana
+# Creamos el titulo de la ventana
 pygame.display.set_caption('Test')
 
 # Lista que almacena todos los sprites
